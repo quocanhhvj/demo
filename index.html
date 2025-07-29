@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siêu Thị Giày | Thế Giới Giày Trong Tầm Tay</title>
+    
+    <!-- Liên kết đến thư viện icon Font Awesome (vẫn giữ bên ngoài để tải icon) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- =================================================================
+    BẮT ĐẦU PHẦN CSS NHÚNG TRỰC TIẾP
+    ================================================================== -->
+    <style>
+        /* --- BIẾN MÀU VÀ THIẾT LẬP CƠ BẢN --- */
+        :root {
+            --primary-color: #e67e22;
+            --secondary-color: #2c3e50;
+            --text-color: #34495e;
+            --bg-color: #ecf0f1;
+            --light-gray: #bdc3c7;
+            --dark-gray: #7f8c8d;
+            --white: #ffffff;
+            --success-color: #27ae60;
+            --error-color: #c0392b;
+            --header-height: 80px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--secondary-color);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .content-section {
+            padding: 60px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: var(--secondary-color);
+            font-weight: 700;
+        }
+
+        /* --- CÁC LỚP TIỆN ÍCH --- */
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            border: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-primary:hover {
+            background-color: transparent;
+            color: var(--primary-color);
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            color: var(--white);
+            border: 2px solid var(--secondary-color);
+        }
+        .btn-secondary:hover {
+            background-color: transparent;
+            color: var(--secondary-color);
+        }
+
+        /* --- HEADER --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--header-height);
+            padding: 0 5%;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .logo {
+            font-size: 2.2rem;
+            color: var(--secondary-color);
+            font-weight: 800;
+        }
+
+        .navigation {
+            display: flex;
+        }
+
+        .navigation .nav-link {
+            font-size: 1.1rem;
+            color: var(--text-color);
+            margin-left: 40px;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        .navigation .nav-link::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--primary-color);
+            border-radius: 5px;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform .4s ease-out;
+        }
+
+        .navigation .nav-link:hover::after,
+        .navigation .nav-link.active::after {
+            transform: scaleX(1);
+        }
+
+        .icons {
+            display: flex;
+            align-items: center;
+        }
+
+        .icons i {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            margin-left: 25px;
+            cursor: pointer;
+        }
+
+        .cart-icon-container {
+            position: relative;
+            cursor: pointer;
+        }
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -12px;
+            background-color: var(--error-color);
+            color: var(--white);
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+            border: 2px solid var(--white);
+        }
+
+        #menu-toggle {
+            display: none;
+        }
+
+        /* --- MAIN CONTENT & PAGE SWITCHING --- */
+        main {
+            padding-top: var(--header-height);
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.6s ease-in-out;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- HOME PAGE: HERO SECTION --- */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: calc(100vh - var(--header-height));
+            background-image: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url('https://via.placeholder.com/1920x1080.png?text=Premium+Shoes');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            padding: 20px;
+        }
+
+        .hero-text h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        .hero-text p {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* --- HOME PAGE: PROMO BANNER --- */
+        .promo-banner {
+            background-color: var(--secondary-color);
+            color: var(--white);
+            text-align: center;
+        }
+        .promo-content h4 {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--primary-color);
+        }
+        .promo-content h2 {
+            font-size: 3rem;
+            margin: 10px 0 30px;
+        }
+        .promo-content h2 span {
+            color: var(--primary-color);
+            font-style: italic;
+        }
+
+
+        /* --- PRODUCT CARD & GRID --- */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        .product-card {
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.1);
+        }
+
+        .product-card img {
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+        }
+        .card-content {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .product-name {
+            font-size: 1.25rem;
+            color: var(--secondary-color);
+            margin-bottom: 5px;
+        }
+        .product-category {
+            font-size: 0.9rem;
+            color: var(--dark-gray);
+            margin-bottom: 15px;
+        }
+        .price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-top: auto; /* Pushes price to the bottom */
+            margin-bottom: 20px;
+        }
+        .btn-add-to-cart {
+            width: 100%;
+            padding: 10px;
+            background-color: var(--secondary-color);
+            color: var(--white);
+            border: 2px solid var(--secondary-color);
+        }
+
+        .btn-add-to-cart:hover {
+            background-color: var(--white);
+            color: var(--secondary-color);
+        }
+
+
+        /* --- PRODUCTS PAGE: LAYOUT & FILTERS --- */
+        #products-page {
+            padding: 40px 5%;
+        }
+        .products-layout {
+            display: flex;
+            gap: 40px;
+        }
+        .filters {
+            width: 250px;
+            flex-shrink: 0;
+            background: var(--white);
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            height: fit-content;
+        }
+        .filters h3 {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            border-bottom: 2px solid var(--bg-color);
+            padding-bottom: 10px;
+        }
+        .filter-group {
+            margin-bottom: 25px;
+        }
+        .filter-group h4 {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+        .filter-option {
+            margin-bottom: 10px;
+        }
+        .filter-option label {
+            margin-left: 8px;
+            cursor: pointer;
+        }
+        #price-range {
+            width: 100%;
+            cursor: pointer;
+        }
+
+        #reset-filters {
+            width: 100%;
+        }
+
+        .products-grid-container {
+            flex-grow: 1;
+        }
+
+        /* --- ABOUT & CONTACT PAGES --- */
+        .text-page {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 40px;
+            border-radius: 8px;
+        }
+        .about-image {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        .text-page h3 {
+            font-size: 1.8rem;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            color: var(--secondary-color);
+        }
+        .text-page p {
+            margin-bottom: 15px;
+        }
+
+        .contact-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            background: var(--white);
+            padding: 40px;
+            border-radius: 8px;
+        }
+        .contact-form-container h3, .contact-info h3 {
+            font-size: 1.8rem;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--light-gray);
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        .contact-info p {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        .contact-info i {
+            color: var(--primary-color);
+            width: 30px;
+            font-size: 1.2rem;
+        }
+        .map-container {
+            margin-top: 20px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        /* --- CART SIDEBAR --- */
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1001;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .cart-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 450px;
+            max-width: 90vw;
+            height: 100%;
+            background-color: var(--white);
+            z-index: 1002;
+            display: flex;
+            flex-direction: column;
+            box-shadow: -5px 0 25px rgba(0,0,0,0.15);
+            transition: right 0.4s ease-in-out;
+        }
+        .cart-sidebar.active {
+            right: 0;
+        }
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid var(--bg-color);
+        }
+        .cart-header h2 {
+            font-size: 1.5rem;
+        }
+        .close-cart-btn {
+            font-size: 2.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-color);
+        }
+        .cart-items {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        .cart-empty {
+            text-align: center;
+            margin-top: 50px;
+            color: var(--dark-gray);
+        }
+        .cart-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            gap: 15px;
+        }
+        .cart-item-img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        .cart-item-info {
+            flex-grow: 1;
+        }
+        .cart-item-name {
+            font-weight: 600;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .cart-item-price {
+            color: var(--primary-color);
+        }
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+            margin-top: 8px;
+        }
+        .quantity-btn {
+            width: 25px;
+            height: 25px;
+            border: 1px solid var(--light-gray);
+            background: var(--white);
+            cursor: pointer;
+        }
+        .quantity-input {
+            width: 40px;
+            text-align: center;
+            border: 1px solid var(--light-gray);
+            border-left: none;
+            border-right: none;
+            height: 25px;
+        }
+        .cart-item-remove {
+            background: none;
+            border: none;
+            color: var(--error-color);
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+        .cart-footer {
+            padding: 20px;
+            border-top: 1px solid var(--bg-color);
+        }
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        .btn-checkout {
+            width: 100%;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--secondary-color);
+            color: var(--light-gray);
+            padding: 60px 5% 20px;
+        }
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .footer-col h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--white);
+        }
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+        .footer-col ul li a {
+            color: var(--light-gray);
+        }
+        .footer-col ul li a:hover {
+            color: var(--primary-color);
+            padding-left: 5px;
+        }
+        .newsletter-form {
+            display: flex;
+            margin-top: 10px;
+        }
+        .newsletter-form input {
+            flex-grow: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 5px 0 0 5px;
+            background: #475a6f;
+            color: var(--white);
+        }
+        .newsletter-form button {
+            width: 45px;
+            border: none;
+            background: var(--primary-color);
+            color: var(--white);
+            cursor: pointer;
+            border-radius: 0 5px 5px 0;
+        }
+        .social-links a {
+            display: inline-block;
+            height: 40px;
+            width: 40px;
+            background-color: rgba(255,255,255,0.2);
+            margin-right: 10px;
+            text-align: center;
+            line-height: 40px;
+            border-radius: 50%;
+            color: var(--white);
+            transition: all 0.3s ease;
+        }
+        .social-links a:hover {
+            background-color: var(--primary-color);
+        }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #475a6f;
+        }
+
+
+        /* --- RESPONSIVE DESIGN --- */
+
+        /* TABLET (max-width: 1024px) */
+        @media (max-width: 1024px) {
+            html {
+                font-size: 15px;
+            }
+            header {
+                padding: 0 3%;
+            }
+            .navigation {
+                position: fixed;
+                top: var(--header-height);
+                left: -100%;
+                width: 300px;
+                height: calc(100vh - var(--header-height));
+                background-color: var(--white);
+                flex-direction: column;
+                padding: 30px;
+                box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+                transition: left 0.4s ease;
+            }
+            .navigation.active {
+                left: 0;
+            }
+            .navigation .nav-link {
+                margin-left: 0;
+                margin-bottom: 25px;
+                font-size: 1.3rem;
+            }
+            #menu-toggle {
+                display: block;
+            }
+            .products-layout {
+                flex-direction: column;
+            }
+            .filters {
+                width: 100%;
+            }
+            .contact-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* MOBILE (max-width: 768px) */
+        @media (max-width: 768px) {
+            html {
+                font-size: 14px;
+            }
+            :root {
+                --header-height: 70px;
+            }
+            .hero-text h1 {
+                font-size: 3rem;
+            }
+            .hero-text p {
+                font-size: 1.2rem;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+            .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 20px;
+            }
+            .footer-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .newsletter-form {
+                justify-content: center;
+            }
+            .social-links {
+                justify-content: center;
+            }
+        }
+
+        /* SMALL MOBILE (max-width: 480px) */
+        @media (max-width: 480px) {
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+            .cart-sidebar {
+                width: 100vw;
+            }
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+            .promo-content h2 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+    <!-- =================================================================
+    KẾT THÚC PHẦN CSS NHÚNG TRỰC TIẾP
+    ================================================================== -->
+</head>
+<body>
+
+    <!-- =================================================================
+    HEADER - DÙNG CHUNG CHO TẤT CẢ CÁC TRANG
+    ================================================================== -->
+    <header>
+        <a href="#" class="logo" data-page="home-page">SiêuThịGiày</a>
+        <nav class="navigation">
+            <a href="#home" data-page="home-page" class="nav-link active">Trang Chủ</a>
+            <a href="#products" data-page="products-page" class="nav-link">Sản Phẩm</a>
+            <a href="#about" data-page="about-page" class="nav-link">Về Chúng Tôi</a>
+            <a href="#contact" data-page="contact-page" class="nav-link">Liên Hệ</a>
+        </nav>
+        <div class="icons">
+            <div id="cart-icon" class="cart-icon-container">
+                <i class="fas fa-shopping-cart"></i>
+                <span id="cart-count" class="cart-count">0</span>
+            </div>
+            <a href="#" aria-label="Tài khoản"><i class="fas fa-user"></i></a>
+            <i class="fas fa-bars" id="menu-toggle"></i>
+        </div>
+    </header>
+
+    <!-- CONTAINER CHÍNH CHO CÁC "TRANG" -->
+    <main id="main-content">
+
+        <!-- =================================================================
+        PAGE 1: TRANG CHỦ (Hiển thị mặc định)
+        ================================================================== -->
+        <section id="home-page" class="page active">
+            <!-- Banner Chính -->
+            <section class="hero">
+                <div class="hero-text">
+                    <h1>Khẳng Định Phong Cách Của Bạn</h1>
+                    <p>Khám phá hàng ngàn mẫu giày độc đáo, chất lượng hàng đầu và phù hợp với mọi cá tính.</p>
+                    <a href="#" class="btn btn-primary nav-link" data-page="products-page">Khám Phá Ngay</a>
+                </div>
+            </section>
+            
+            <!-- Sản phẩm mới về -->
+            <section class="featured-products content-section">
+                <h2 class="section-title">Hàng Mới Về</h2>
+                <div class="product-grid">
+                    <!-- Sản phẩm sẽ được JS chèn vào đây, ví dụ: -->
+                    <div class="product-card" data-id="1">
+                        <img src="https://via.placeholder.com/300x300.png?text=Nike+Air+Force+1" alt="Nike Air Force 1">
+                        <div class="card-content">
+                            <h3 class="product-name">Nike Air Force 1</h3>
+                            <p class="product-category">Lifestyle</p>
+                            <div class="price">2.800.000 VNĐ</div>
+                            <button class="btn btn-add-to-cart">Thêm vào giỏ</button>
+                        </div>
+                    </div>
+                     <div class="product-card" data-id="2">
+                        <img src="https://via.placeholder.com/300x300.png?text=Adidas+Ultraboost" alt="Adidas Ultraboost">
+                        <div class="card-content">
+                            <h3 class="product-name">Adidas Ultraboost</h3>
+                             <p class="product-category">Running</p>
+                            <div class="price">4.500.000 VNĐ</div>
+                            <button class="btn btn-add-to-cart">Thêm vào giỏ</button>
+                        </div>
+                    </div>
+                     <div class="product-card" data-id="3">
+                        <img src="https://via.placeholder.com/300x300.png?text=Converse+Chuck+70" alt="Converse Chuck 70">
+                         <div class="card-content">
+                            <h3 class="product-name">Converse Chuck 70</h3>
+                            <p class="product-category">Classic</p>
+                            <div class="price">1.850.000 VNĐ</div>
+                            <button class="btn btn-add-to-cart">Thêm vào giỏ</button>
+                        </div>
+                    </div>
+                     <div class="product-card" data-id="4">
+                        <img src="https://via.placeholder.com/300x300.png?text=Vans+Old+Skool" alt="Vans Old Skool">
+                         <div class="card-content">
+                            <h3 class="product-name">Vans Old Skool</h3>
+                            <p class="product-category">Skate</p>
+                            <div class="price">1.650.000 VNĐ</div>
+                            <button class="btn btn-add-to-cart">Thêm vào giỏ</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+             <!-- Banner quảng cáo -->
+            <section class="promo-banner content-section">
+                <div class="promo-content">
+                    <h4>Giảm Giá Giữa Mùa</h4>
+                    <h2>Lên đến <span>50%</span> cho các mẫu chọn lọc</h2>
+                    <a href="#" class="btn btn-secondary nav-link" data-page="products-page">Xem Ngay</a>
+                </div>
+            </section>
+        </section>
+
+
+        <!-- =================================================================
+        PAGE 2: TRANG SẢN PHẨM VỚI BỘ LỌC
+        ================================================================== -->
+        <section id="products-page" class="page">
+            <div class="products-layout">
+                <!-- CỘT BỘ LỌC -->
+                <aside class="filters">
+                    <h3>Bộ Lọc Sản Phẩm</h3>
+                    <!-- Lọc theo hãng -->
+                    <div class="filter-group">
+                        <h4>Hãng</h4>
+                        <div class="filter-option"><input type="checkbox" id="brand-nike" data-filter="brand" value="Nike"> <label for="brand-nike">Nike</label></div>
+                        <div class="filter-option"><input type="checkbox" id="brand-adidas" data-filter="brand" value="Adidas"> <label for="brand-adidas">Adidas</label></div>
+                        <div class="filter-option"><input type="checkbox" id="brand-vans" data-filter="brand" value="Vans"> <label for="brand-vans">Vans</label></div>
+                        <div class="filter-option"><input type="checkbox" id="brand-converse" data-filter="brand" value="Converse"> <label for="brand-converse">Converse</label></div>
+                        <div class="filter-option"><input type="checkbox" id="brand-puma" data-filter="brand" value="Puma"> <label for="brand-puma">Puma</label></div>
+                    </div>
+                    <!-- Lọc theo loại -->
+                     <div class="filter-group">
+                        <h4>Loại Giày</h4>
+                        <div class="filter-option"><input type="checkbox" id="cat-running" data-filter="category" value="Running"> <label for="cat-running">Chạy bộ</label></div>
+                        <div class="filter-option"><input type="checkbox" id="cat-lifestyle" data-filter="category" value="Lifestyle"> <label for="cat-lifestyle">Thời trang</label></div>
+                        <div class="filter-option"><input type="checkbox" id="cat-skate" data-filter="category" value="Skate"> <label for="cat-skate">Trượt ván</label></div>
+                         <div class="filter-option"><input type="checkbox" id="cat-classic" data-filter="category" value="Classic"> <label for="cat-classic">Cổ điển</label></div>
+                    </div>
+                    <!-- Lọc theo giá -->
+                    <div class="filter-group">
+                        <h4>Mức Giá</h4>
+                        <label for="price-range">Dưới: <span id="price-value">10.000.000</span> VNĐ</label>
+                        <input type="range" id="price-range" min="500000" max="10000000" step="100000" value="10000000">
+                    </div>
+                    <button id="reset-filters" class="btn btn-secondary">Xóa bộ lọc</button>
+                </aside>
+
+                <!-- LƯỚI SẢN PHẨM -->
+                <div class="products-grid-container">
+                     <div id="all-products-grid" class="product-grid">
+                        <!-- SẢN PHẨM SẼ ĐƯỢC THÊM VÀO ĐÂY BẰNG JAVASCRIPT -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =================================================================
+        PAGE 3: TRANG GIỚI THIỆU
+        ================================================================== -->
+        <section id="about-page" class="page">
+            <div class="content-section text-page">
+                 <h2 class="section-title">Câu Chuyện Về Siêu Thị Giày</h2>
+                 <img src="https://via.placeholder.com/800x400.png?text=Our+Store" alt="Cửa hàng của chúng tôi" class="about-image">
+                 <p>Thành lập năm 2020, Siêu Thị Giày khởi đầu từ một niềm đam mê bất tận với những đôi giày và văn hóa sneakers. Chúng tôi không chỉ bán giày, chúng tôi muốn lan tỏa câu chuyện, cá tính và tinh thần đằng sau mỗi thiết kế. Từ những đôi giày chạy bộ hiệu năng cao đến những mẫu sneaker kinh điển không bao giờ lỗi mốt, mỗi sản phẩm tại Siêu Thị Giày đều được lựa chọn kỹ lưỡng để đảm bảo chất lượng và tính xác thực.</p>
+                 <h3>Sứ Mệnh</h3>
+                 <p>Sứ mệnh của chúng tôi là trở thành điểm đến đáng tin cậy nhất cho cộng đồng yêu giày tại Việt Nam, mang đến trải nghiệm mua sắm vượt trội với sản phẩm đa dạng, dịch vụ khách hàng tận tâm và kiến thức chuyên sâu về sản phẩm.</p>
+                 <h3>Đội Ngũ</h3>
+                 <p>Đội ngũ của Siêu Thị Giày là những người trẻ năng động, am hiểu và luôn cập nhật những xu hướng mới nhất trong thế giới sneakers. Chúng tôi luôn sẵn sàng tư vấn để giúp bạn tìm được đôi giày hoàn hảo nhất cho phong cách và nhu cầu của mình.</p>
+            </div>
+        </section>
+
+        <!-- =================================================================
+        PAGE 4: TRANG LIÊN HỆ
+        ================================================================== -->
+        <section id="contact-page" class="page">
+             <div class="content-section">
+                <h2 class="section-title">Liên Hệ Với Chúng Tôi</h2>
+                <div class="contact-layout">
+                    <div class="contact-form-container">
+                        <h3>Gửi Tin Nhắn</h3>
+                        <form id="contact-form">
+                            <div class="form-group">
+                                <label for="name">Họ và Tên</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                             <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                             <div class="form-group">
+                                <label for="message">Nội dung</label>
+                                <textarea id="message" name="message" rows="6" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Gửi</button>
+                        </form>
+                    </div>
+                    <div class="contact-info">
+                        <h3>Thông Tin</h3>
+                        <p><i class="fas fa-map-marker-alt"></i> 123 Đường Thời Trang, Quận 1, TP. Hồ Chí Minh</p>
+                        <p><i class="fas fa-phone"></i> (028) 3888-9999</p>
+                        <p><i class="fas fa-envelope"></i> hotro@sieuthigiay.vn</p>
+                        <p><i class="fas fa-clock"></i> Mở cửa: 9:00 - 21:00, Thứ 2 - Chủ Nhật</p>
+                        <div class="map-container">
+                           <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.447783096229!2d106.6974453147493!3d10.77698399232102!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f38f9ed887b%3A0x14218d53381e0a29!2zQ2jhu6MgQuG6v24gVGjDoG5o!5e0!3m2!1svi!2s!4v1654245635874!5m2!1svi!2s" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- =================================================================
+    GIỎ HÀNG (Sidebar ẩn)
+    ================================================================== -->
+    <div id="cart-sidebar" class="cart-sidebar">
+        <div class="cart-header">
+            <h2>Giỏ Hàng Của Bạn</h2>
+            <button id="close-cart" class="close-cart-btn">×</button>
+        </div>
+        <div id="cart-items-container" class="cart-items">
+            <!-- Các sản phẩm trong giỏ hàng sẽ được JS chèn vào đây -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Tổng cộng:</span>
+                <span id="cart-total-price">0 VNĐ</span>
+            </div>
+            <button class="btn btn-primary btn-checkout">Thanh Toán</button>
+        </div>
+    </div>
+    <div id="cart-overlay" class="cart-overlay"></div>
+
+
+    <!-- =================================================================
+    FOOTER - DÙNG CHUNG CHO TẤT CẢ CÁC TRANG
+    ================================================================== -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>Về Siêu Thị Giày</h3>
+                <p>Điểm đến hàng đầu cho những tín đồ sneakers tại Việt Nam. Cam kết hàng chính hãng, chất lượng và dịch vụ tốt nhất.</p>
+            </div>
+            <div class="footer-col">
+                <h3>Chính Sách</h3>
+                <ul>
+                    <li><a href="#">Chính sách bảo mật</a></li>
+                    <li><a href="#">Điều khoản dịch vụ</a></li>
+                    <li><a href="#">Chính sách đổi trả</a></li>
+                    <li><a href="#">Chính sách vận chuyển</a></li>
+                </ul>
+            </div>
+             <div class="footer-col">
+                <h3>Đăng Ký Nhận Tin</h3>
+                <p>Nhận thông tin về sản phẩm mới và khuyến mãi đặc biệt.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Nhập email của bạn...">
+                    <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                </form>
+            </div>
+            <div class="footer-col">
+                <h3>Theo Dõi Chúng Tôi</h3>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Tiktok"><i class="fab fa-tiktok"></i></a>
+                     <a href="#" aria-label="Youtube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Siêu Thị Giày. Thiết kế và phát triển với ❤️.</p>
+        </div>
+    </footer>
+
+    <!-- =================================================================
+    BẮT ĐẦU PHẦN JAVASCRIPT NHÚNG TRỰC TIẾP
+    ================================================================== -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            //==================================================================
+            // KHO DỮ LIỆU SẢN PHẨM (DATABASE MÔ PHỎNG)
+            //==================================================================
+            const productsData = [
+                { id: 1, name: 'Nike Air Force 1 \'07', brand: 'Nike', category: 'Lifestyle', price: 2800000, img: 'https://via.placeholder.com/300x300.png?text=Nike+Air+Force+1' },
+                { id: 2, name: 'Adidas Ultraboost 1.0', brand: 'Adidas', category: 'Running', price: 4500000, img: 'https://via.placeholder.com/300x300.png?text=Adidas+Ultraboost' },
+                { id: 3, name: 'Converse Chuck 70', brand: 'Converse', category: 'Classic', price: 1850000, img: 'https://via.placeholder.com/300x300.png?text=Converse+Chuck+70' },
+                { id: 4, name: 'Vans Old Skool', brand: 'Vans', category: 'Skate', price: 1650000, img: 'https://via.placeholder.com/300x300.png?text=Vans+Old+Skool' },
+                { id: 5, name: 'Puma Suede Classic', brand: 'Puma', category: 'Lifestyle', price: 2100000, img: 'https://via.placeholder.com/300x300.png?text=Puma+Suede' },
+                { id: 6, name: 'Nike Air Max 97', brand: 'Nike', category: 'Lifestyle', price: 4200000, img: 'https://via.placeholder.com/300x300.png?text=Nike+Air+Max+97' },
+                { id: 7, name: 'Adidas Stan Smith', brand: 'Adidas', category: 'Classic', price: 2500000, img: 'https://via.placeholder.com/300x300.png?text=Adidas+Stan+Smith' },
+                { id: 8, name: 'Converse One Star', brand: 'Converse', category: 'Skate', price: 1900000, img: 'https://via.placeholder.com/300x300.png?text=Converse+One+Star' },
+                { id: 9, name: 'Vans SK8-Hi', brand: 'Vans', category: 'Skate', price: 1950000, img: 'https://via.placeholder.com/300x300.png?text=Vans+SK8-Hi' },
+                { id: 10, name: 'Puma RS-X', brand: 'Puma', category: 'Lifestyle', price: 2900000, img: 'https://via.placeholder.com/300x300.png?text=Puma+RS-X' },
+                { id: 11, name: 'Nike Pegasus 40', brand: 'Nike', category: 'Running', price: 3600000, img: 'https://via.placeholder.com/300x300.png?text=Nike+Pegasus+40' },
+                { id: 12, name: 'Adidas Forum Low', brand: 'Adidas', category: 'Classic', price: 2700000, img: 'https://via.placeholder.com/300x300.png?text=Adidas+Forum+Low' },
+                { id: 13, name: 'Nike Dunk Low', brand: 'Nike', category: 'Lifestyle', price: 3200000, img: 'https://via.placeholder.com/300x300.png?text=Nike+Dunk+Low' },
+                { id: 14, name: 'Puma Cali', brand: 'Puma', category: 'Lifestyle', price: 2300000, img: 'https://via.placeholder.com/300x300.png?text=Puma+Cali' },
+                { id: 15, name: 'Vans Slip-On', brand: 'Vans', category: 'Skate', price: 1500000, img: 'https://via.placeholder.com/300x300.png?text=Vans+Slip-On' },
+                { id: 16, name: 'Converse Jack Purcell', brand: 'Converse', category: 'Classic', price: 1700000, img: 'https://via.placeholder.com/300x300.png?text=Jack+Purcell' },
+                { id: 17, name: 'Nike Blazer Mid \'77', brand: 'Nike', category: 'Classic', price: 2950000, img: 'https://via.placeholder.com/300x300.png?text=Nike+Blazer+Mid' },
+                { id: 18, name: 'Adidas NMD_R1', brand: 'Adidas', category: 'Lifestyle', price: 3800000, img: 'https://via.placeholder.com/300x300.png?text=Adidas+NMD' },
+                { id: 19, name: 'Puma Future Rider', brand: 'Puma', category: 'Running', price: 2600000, img: 'https://via.placeholder.com/300x300.png?text=Puma+Future+Rider' },
+                { id: 20, name: 'Vans Authentic', brand: 'Vans', category: 'Classic', price: 1450000, img: 'https://via.placeholder.com/300x300.png?text=Vans+Authentic' },
+            ];
+            
+            //==================================================================
+            // KHAI BÁO BIẾN - DOM ELEMENTS
+            //==================================================================
+            const mainContent = document.getElementById('main-content');
+            const pages = document.querySelectorAll('.page');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const menuToggle = document.getElementById('menu-toggle');
+            const navigation = document.querySelector('.navigation');
+            
+            // Cart elements
+            const cartIcon = document.getElementById('cart-icon');
+            const cartSidebar = document.getElementById('cart-sidebar');
+            const cartOverlay = document.getElementById('cart-overlay');
+            const closeCartBtn = document.getElementById('close-cart');
+            const cartItemsContainer = document.getElementById('cart-items-container');
+            const cartCountEl = document.getElementById('cart-count');
+            const cartTotalPriceEl = document.getElementById('cart-total-price');
+
+            // Products page elements
+            const allProductsGrid = document.getElementById('all-products-grid');
+            const filterCheckboxes = document.querySelectorAll('.filters input[type="checkbox"]');
+            const priceRange = document.getElementById('price-range');
+            const priceValueEl = document.getElementById('price-value');
+            const resetFiltersBtn = document.getElementById('reset-filters');
+            
+            //==================================================================
+            // LOGIC CHUYỂN TRANG (PAGE NAVIGATION)
+            //==================================================================
+            function navigateToPage(pageId) {
+                pages.forEach(page => {
+                    page.classList.remove('active');
+                });
+                const targetPage = document.getElementById(pageId);
+                if (targetPage) {
+                    targetPage.classList.add('active');
+                }
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if(link.dataset.page === pageId) {
+                        link.classList.add('active');
+                    }
+                });
+
+                navigation.classList.remove('active');
+                window.scrollTo(0, 0);
+            }
+
+            document.body.addEventListener('click', (e) => {
+                if (e.target.matches('.nav-link')) {
+                    e.preventDefault();
+                    const pageId = e.target.dataset.page;
+                    navigateToPage(pageId);
+                }
+            });
+            
+            document.querySelector('.logo').addEventListener('click', (e) => {
+                e.preventDefault();
+                navigateToPage('home-page');
+            });
+
+            menuToggle.addEventListener('click', () => {
+                navigation.classList.toggle('active');
+            });
+            
+            //==================================================================
+            // HIỂN THỊ SẢN PHẨM (RENDER PRODUCTS)
+            //==================================================================
+            function formatPrice(price) {
+                return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(price);
+            }
+            
+            function createProductCard(product) {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.dataset.id = product.id;
+                card.dataset.brand = product.brand;
+                card.dataset.category = product.category;
+                card.dataset.price = product.price;
+
+                card.innerHTML = `
+                    <img src="${product.img}" alt="${product.name}">
+                    <div class="card-content">
+                        <h3 class="product-name">${product.name}</h3>
+                        <p class="product-category">${product.category}</p>
+                        <div class="price">${formatPrice(product.price)}</div>
+                        <button class="btn btn-add-to-cart" data-id="${product.id}">Thêm vào giỏ</button>
+                    </div>
+                `;
+                return card;
+            }
+
+            function renderProducts(container, productList) {
+                if (!container) return;
+                container.innerHTML = '';
+                productList.forEach(product => {
+                    container.appendChild(createProductCard(product));
+                });
+            }
+
+            renderProducts(allProductsGrid, productsData);
+            
+            //==================================================================
+            // LOGIC GIỎ HÀNG (SHOPPING CART)
+            //==================================================================
+            let cart = JSON.parse(localStorage.getItem('shoppingCart')) || [];
+
+            function openCart() {
+                cartSidebar.classList.add('active');
+                cartOverlay.classList.add('active');
+            }
+
+            function closeCart() {
+                cartSidebar.classList.remove('active');
+                cartOverlay.classList.remove('active');
+            }
+
+            cartIcon.addEventListener('click', openCart);
+            closeCartBtn.addEventListener('click', closeCart);
+            cartOverlay.addEventListener('click', closeCart);
+
+            function addToCart(productId) {
+                const productToAdd = productsData.find(p => p.id === productId);
+                const existingItem = cart.find(item => item.id === productId);
+
+                if (existingItem) {
+                    existingItem.quantity++;
+                } else {
+                    cart.push({ ...productToAdd, quantity: 1 });
+                }
+                
+                updateCart();
+                openCart();
+            }
+            
+            document.body.addEventListener('click', function(event) {
+                if (event.target.matches('.btn-add-to-cart')) {
+                    const productId = parseInt(event.target.dataset.id);
+                    addToCart(productId);
+                }
+            });
+
+
+            function updateCart() {
+                renderCartItems();
+                updateCartTotal();
+                updateCartIcon();
+                localStorage.setItem('shoppingCart', JSON.stringify(cart));
+            }
+
+            function renderCartItems() {
+                if (!cartItemsContainer) return;
+                cartItemsContainer.innerHTML = '';
+                if (cart.length === 0) {
+                    cartItemsContainer.innerHTML = '<p class="cart-empty">Giỏ hàng của bạn đang trống.</p>';
+                    return;
+                }
+
+                cart.forEach(item => {
+                    const cartItemEl = document.createElement('div');
+                    cartItemEl.className = 'cart-item';
+                    cartItemEl.innerHTML = `
+                        <img src="${item.img}" alt="${item.name}" class="cart-item-img">
+                        <div class="cart-item-info">
+                            <span class="cart-item-name">${item.name}</span>
+                            <span class="cart-item-price">${formatPrice(item.price)}</span>
+                            <div class="cart-item-quantity">
+                                <button class="quantity-btn" data-id="${item.id}" data-action="decrease">-</button>
+                                <input type="number" class="quantity-input" value="${item.quantity}" min="1" data-id="${item.id}">
+                                <button class="quantity-btn" data-id="${item.id}" data-action="increase">+</button>
+                            </div>
+                        </div>
+                        <button class="cart-item-remove" data-id="${item.id}">×</button>
+                    `;
+                    cartItemsContainer.appendChild(cartItemEl);
+                });
+            }
+            
+            function updateCartTotal() {
+                const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+                if (cartTotalPriceEl) {
+                    cartTotalPriceEl.textContent = formatPrice(total);
+                }
+            }
+            
+            function updateCartIcon() {
+                const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+                if (cartCountEl) {
+                    cartCountEl.textContent = totalItems;
+                    cartCountEl.style.display = totalItems > 0 ? 'flex' : 'none';
+                }
+            }
+            
+            if (cartItemsContainer) {
+                cartItemsContainer.addEventListener('click', (e) => {
+                    const target = e.target;
+                    if (!target.dataset.id) return;
+                    const id = parseInt(target.dataset.id);
+
+                    if (target.classList.contains('cart-item-remove')) {
+                        cart = cart.filter(item => item.id !== id);
+                    }
+
+                    if (target.classList.contains('quantity-btn')) {
+                        const action = target.dataset.action;
+                        const item = cart.find(i => i.id === id);
+                        if(item) {
+                            if(action === 'increase') {
+                                item.quantity++;
+                            } else if (action === 'decrease') {
+                                if(item.quantity > 1) {
+                                    item.quantity--;
+                                } else {
+                                    cart = cart.filter(item => item.id !== id);
+                                }
+                            }
+                        }
+                    }
+                    updateCart();
+                });
+
+                cartItemsContainer.addEventListener('change', (e) => {
+                    if(e.target.classList.contains('quantity-input')) {
+                        const id = parseInt(e.target.dataset.id);
+                        let newQuantity = parseInt(e.target.value);
+                        if (isNaN(newQuantity) || newQuantity < 1) {
+                            newQuantity = 1;
+                        }
+                        
+                        const item = cart.find(i => i.id === id);
+                        if (item) {
+                            item.quantity = newQuantity;
+                        }
+                        updateCart();
+                    }
+                });
+            }
+            
+            updateCart();
+
+            //==================================================================
+            // LOGIC LỌC SẢN PHẨM (PRODUCT FILTERING)
+            //==================================================================
+            let activeFilters = {
+                brand: [],
+                category: [],
+                maxPrice: 10000000
+            };
+
+            function applyFilters() {
+                if (!allProductsGrid) return;
+                const filteredProducts = productsData.filter(product => {
+                    const brandMatch = activeFilters.brand.length === 0 || activeFilters.brand.includes(product.brand);
+                    const categoryMatch = activeFilters.category.length === 0 || activeFilters.category.includes(product.category);
+                    const priceMatch = product.price <= activeFilters.maxPrice;
+                    return brandMatch && categoryMatch && priceMatch;
+                });
+                renderProducts(allProductsGrid, filteredProducts);
+            }
+
+            if (filterCheckboxes) {
+                filterCheckboxes.forEach(checkbox => {
+                    checkbox.addEventListener('change', () => {
+                        const filterType = checkbox.dataset.filter;
+                        const value = checkbox.value;
+                        
+                        if(checkbox.checked) {
+                            activeFilters[filterType].push(value);
+                        } else {
+                            activeFilters[filterType] = activeFilters[filterType].filter(item => item !== value);
+                        }
+                        applyFilters();
+                    });
+                });
+            }
+
+            if (priceRange) {
+                priceRange.addEventListener('input', (e) => {
+                    const maxPrice = parseInt(e.target.value);
+                    activeFilters.maxPrice = maxPrice;
+                    if(priceValueEl) {
+                       priceValueEl.textContent = formatPrice(maxPrice);
+                    }
+                    applyFilters();
+                });
+            }
+
+            if(resetFiltersBtn) {
+                resetFiltersBtn.addEventListener('click', () => {
+                    filterCheckboxes.forEach(cb => cb.checked = false);
+                    priceRange.value = 10000000;
+                    if(priceValueEl) {
+                        priceValueEl.textContent = formatPrice(10000000);
+                    }
+                    
+                    activeFilters = { brand: [], category: [], maxPrice: 10000000 };
+                    applyFilters();
+                });
+            }
+
+        });
+    </script>
+    <!-- =================================================================
+    KẾT THÚC PHẦN JAVASCRIPT NHÚNG TRỰC TIẾP
+    ================================================================== -->
+</body>
+</html>
