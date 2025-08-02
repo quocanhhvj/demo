@@ -4,13 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Siêu Thị Giày | Thế Giới Giày Trong Tầm Tay</title>
-    
     <!-- Liên kết đến thư viện icon Font Awesome (vẫn giữ bên ngoài để tải icon) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
-    <!-- =================================================================
-    BẮT ĐẦU PHẦN CSS NHÚNG TRỰC TIẾP
-    ================================================================== -->
     <style>
         /* --- BIẾN MÀU VÀ THIẾT LẬP CƠ BẢN --- */
         :root {
@@ -204,8 +199,6 @@
         #menu-toggle {
             display: none;
         }
-
-        /* --- MAIN CONTENT & PAGE SWITCHING --- */
         main {
             padding-top: var(--header-height);
         }
@@ -223,8 +216,6 @@
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
-        /* --- HOME PAGE: HERO SECTION --- */
         .hero {
             display: flex;
             align-items: center;
@@ -385,8 +376,6 @@
         .products-grid-container {
             flex-grow: 1;
         }
-
-        /* --- ABOUT & CONTACT PAGES --- */
         .text-page {
             max-width: 900px;
             margin: 0 auto;
@@ -453,8 +442,6 @@
             border-radius: 8px;
             overflow: hidden;
         }
-
-        /* --- CART SIDEBAR --- */
         .cart-overlay {
             position: fixed;
             top: 0;
@@ -579,8 +566,6 @@
         .btn-checkout {
             width: 100%;
         }
-
-        /* --- FOOTER --- */
         footer {
             background-color: var(--secondary-color);
             color: var(--light-gray);
@@ -647,11 +632,6 @@
             padding-top: 20px;
             border-top: 1px solid #475a6f;
         }
-
-
-        /* --- RESPONSIVE DESIGN --- */
-
-        /* TABLET (max-width: 1024px) */
         @media (max-width: 1024px) {
             html {
                 font-size: 15px;
@@ -692,8 +672,6 @@
                 grid-template-columns: 1fr;
             }
         }
-
-        /* MOBILE (max-width: 768px) */
         @media (max-width: 768px) {
             html {
                 font-size: 14px;
@@ -725,8 +703,6 @@
                 justify-content: center;
             }
         }
-
-        /* SMALL MOBILE (max-width: 480px) */
         @media (max-width: 480px) {
             .product-grid {
                 grid-template-columns: 1fr;
@@ -742,15 +718,10 @@
             }
         }
     </style>
-    <!-- =================================================================
-    KẾT THÚC PHẦN CSS NHÚNG TRỰC TIẾP
-    ================================================================== -->
+   
 </head>
 <body>
 
-    <!-- =================================================================
-    HEADER - DÙNG CHUNG CHO TẤT CẢ CÁC TRANG
-    ================================================================== -->
     <header>
         <a href="#" class="logo" data-page="home-page">SiêuThịGiày</a>
         <nav class="navigation">
@@ -768,15 +739,11 @@
             <i class="fas fa-bars" id="menu-toggle"></i>
         </div>
     </header>
-
-    <!-- CONTAINER CHÍNH CHO CÁC "TRANG" -->
     <main id="main-content">
 
-        <!-- =================================================================
-        PAGE 1: TRANG CHỦ (Hiển thị mặc định)
-        ================================================================== -->
+    
         <section id="home-page" class="page active">
-            <!-- Banner Chính -->
+   
             <section class="hero">
                 <div class="hero-text">
                     <h1>Khẳng Định Phong Cách Của Bạn</h1>
@@ -785,7 +752,7 @@
                 </div>
             </section>
             
-            <!-- Sản phẩm mới về -->
+
             <section class="featured-products content-section">
                 <h2 class="section-title">Hàng Mới Về</h2>
                 <div class="product-grid">
@@ -838,11 +805,6 @@
                 </div>
             </section>
         </section>
-
-
-        <!-- =================================================================
-        PAGE 2: TRANG SẢN PHẨM VỚI BỘ LỌC
-        ================================================================== -->
         <section id="products-page" class="page">
             <div class="products-layout">
                 <!-- CỘT BỘ LỌC -->
@@ -883,9 +845,7 @@
             </div>
         </section>
 
-        <!-- =================================================================
-        PAGE 3: TRANG GIỚI THIỆU
-        ================================================================== -->
+
         <section id="about-page" class="page">
             <div class="content-section text-page">
                  <h2 class="section-title">Câu Chuyện Về Siêu Thị Giày</h2>
@@ -898,9 +858,7 @@
             </div>
         </section>
 
-        <!-- =================================================================
-        PAGE 4: TRANG LIÊN HỆ
-        ================================================================== -->
+
         <section id="contact-page" class="page">
              <div class="content-section">
                 <h2 class="section-title">Liên Hệ Với Chúng Tôi</h2>
@@ -939,9 +897,7 @@
 
     </main>
 
-    <!-- =================================================================
-    GIỎ HÀNG (Sidebar ẩn)
-    ================================================================== -->
+
     <div id="cart-sidebar" class="cart-sidebar">
         <div class="cart-header">
             <h2>Giỏ Hàng Của Bạn</h2>
@@ -961,9 +917,7 @@
     <div id="cart-overlay" class="cart-overlay"></div>
 
 
-    <!-- =================================================================
-    FOOTER - DÙNG CHUNG CHO TẤT CẢ CÁC TRANG
-    ================================================================== -->
+ 
     <footer>
         <div class="footer-container">
             <div class="footer-col">
@@ -1001,16 +955,9 @@
             <p>© 2025 Siêu Thị Giày. Thiết kế và phát triển với ❤️.</p>
         </div>
     </footer>
-
-    <!-- =================================================================
-    BẮT ĐẦU PHẦN JAVASCRIPT NHÚNG TRỰC TIẾP
-    ================================================================== -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
 
-            //==================================================================
-            // KHO DỮ LIỆU SẢN PHẨM (DATABASE MÔ PHỎNG)
-            //==================================================================
             const productsData = [
                 { id: 1, name: 'Nike Air Force 1 \'07', brand: 'Nike', category: 'Lifestyle', price: 2800000, img: 'https://via.placeholder.com/300x300.png?text=Nike+Air+Force+1' },
                 { id: 2, name: 'Adidas Ultraboost 1.0', brand: 'Adidas', category: 'Running', price: 4500000, img: 'https://via.placeholder.com/300x300.png?text=Adidas+Ultraboost' },
@@ -1033,10 +980,7 @@
                 { id: 19, name: 'Puma Future Rider', brand: 'Puma', category: 'Running', price: 2600000, img: 'https://via.placeholder.com/300x300.png?text=Puma+Future+Rider' },
                 { id: 20, name: 'Vans Authentic', brand: 'Vans', category: 'Classic', price: 1450000, img: 'https://via.placeholder.com/300x300.png?text=Vans+Authentic' },
             ];
-            
-            //==================================================================
-            // KHAI BÁO BIẾN - DOM ELEMENTS
-            //==================================================================
+
             const mainContent = document.getElementById('main-content');
             const pages = document.querySelectorAll('.page');
             const navLinks = document.querySelectorAll('.nav-link');
@@ -1059,9 +1003,7 @@
             const priceValueEl = document.getElementById('price-value');
             const resetFiltersBtn = document.getElementById('reset-filters');
             
-            //==================================================================
-            // LOGIC CHUYỂN TRANG (PAGE NAVIGATION)
-            //==================================================================
+     
             function navigateToPage(pageId) {
                 pages.forEach(page => {
                     page.classList.remove('active');
@@ -1098,10 +1040,7 @@
             menuToggle.addEventListener('click', () => {
                 navigation.classList.toggle('active');
             });
-            
-            //==================================================================
-            // HIỂN THỊ SẢN PHẨM (RENDER PRODUCTS)
-            //==================================================================
+    
             function formatPrice(price) {
                 return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(price);
             }
@@ -1136,9 +1075,7 @@
 
             renderProducts(allProductsGrid, productsData);
             
-            //==================================================================
-            // LOGIC GIỎ HÀNG (SHOPPING CART)
-            //==================================================================
+
             let cart = JSON.parse(localStorage.getItem('shoppingCart')) || [];
 
             function openCart() {
@@ -1274,9 +1211,7 @@
             
             updateCart();
 
-            //==================================================================
-            // LOGIC LỌC SẢN PHẨM (PRODUCT FILTERING)
-            //==================================================================
+    
             let activeFilters = {
                 brand: [],
                 category: [],
@@ -1336,8 +1271,7 @@
 
         });
     </script>
-    <!-- =================================================================
-    KẾT THÚC PHẦN JAVASCRIPT NHÚNG TRỰC TIẾP
-    ================================================================== -->
+
 </body>
+
 </html>
